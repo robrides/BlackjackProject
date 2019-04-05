@@ -36,7 +36,7 @@ public class BlackjackHand implements Hand {
 
 	@Override
 	public String toString() {
-		return "Player card: " + handPlayer;
+		return "Hand: " + handPlayer;
 	}
 
 

@@ -24,27 +24,33 @@ public class BlackjackApp {
 		kb = new Scanner(System.in);
 		System.out.println("Welcome to the Blackjack Table\n");
 
-		System.out.println("Dealing...");
-		dealFirstHand();
-		printHand();
 		do {
+			System.out.println("Dealing...");
+			dealFirstHand();
+			printHand();
 			winner = false;
 			getPlayerChoice();
-			dealCardToDealer();
-			printHand();
-			checkForWinner();
+			if (stand && !winner) {
+				dealCardToDealer();
+				printHand();
+				checkForWinner();
+			}
+//			checkForWinner();
 		} while (!winner);
 	}
 
 	private void checkForWinner() {
 
 		if (dealerHand.getHandValue() < 22 && playerHand.getHandValue() < 22) {
-			if (dealerHand.getHandValue() == 21) {
+			if (dealerHand.getHandValue() > playerHand.getHandValue()) {
 				System.out.println("\nDealer wins.\n");
 				winner = true;
-			} else if (playerHand.getHandValue() == 21) {
+			} else if (playerHand.getHandValue() > dealerHand.getHandValue()) {
 				System.out.println("\nDealer wins.\n");
 				winner = true;
+			} else {
+				winner = true;
+				System.out.println("\nThe hand is a push.\n");
 			}
 		} else if (dealerHand.getHandValue() > 21) {
 			System.out.println("\nPlayer wins!!!\n");
@@ -53,20 +59,16 @@ public class BlackjackApp {
 			System.out.println("\nDealer wins!!!\n");
 			winner = true;
 		}
+
 		winner = false;
 	}
 
 	private void dealCardToDealer() {
-		if (dealerHand.getHandValue() < 17) {
-			dealerHand.addCard(deck.dealCard());
-			System.out.println("\nCard dealt to dealer\n" + dealerHand.toString());
-			if (!stand) {
-				System.out.println("Dealer stands at 17\n");
-			}
-		} else if (stand) {
+		while (dealerHand.getHandValue() < 17) {
 			dealerHand.addCard(deck.dealCard());
 			System.out.println("\nCard dealt to dealer\n" + dealerHand.toString());
 		}
+		System.out.println("Dealer stands at 17\n");
 	}
 
 	private void getPlayerChoice() {
@@ -83,11 +85,6 @@ public class BlackjackApp {
 				System.out.println("Choice == " + choice);
 				keepGoing = false;
 				stand = true;
-			checkForWinner();
-			do { 
-				dealCardToDealer();
-				checkForWinner();
-			} while (!winner); // while winner is not true
 				break;
 			case 2:
 				playerHand.addCard(deck.dealCard());
@@ -97,12 +94,14 @@ public class BlackjackApp {
 			default:
 				break;
 			}
-		System.out.println(choice + " Choice is...");
+			System.out.println(choice + " Choice is...");
 		} while (keepGoing);
 
 	}
 
 	private void dealFirstHand() {
+		dealerHand.clearHand();
+		playerHand.clearHand();
 		System.out.println();
 		playerHand.addCard(deck.dealCard());
 		System.out.println(playerHand.toString());
