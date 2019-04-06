@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.skilldistillery.cards.common.Card;
-import com.skilldistillery.cards.common.Deck;
 import com.skilldistillery.cards.common.Hand;
 
 public class BlackjackHand implements Hand {
@@ -39,10 +38,15 @@ public class BlackjackHand implements Hand {
 		return "Hand: " + handPlayer;
 	}
 
-
 	@Override
 	public void addCard(Card card) {
 		handPlayer.add(card);
+	}
+
+	public List<Card> handList() {
+		List<Card> playerHand = new ArrayList<>();
+		playerHand = handPlayer;
+		return playerHand;
 	}
 
 }
