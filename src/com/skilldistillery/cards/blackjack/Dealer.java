@@ -26,31 +26,22 @@ public class Dealer {
 		player.addCard(deck.dealCard());
 		System.out.println(player.toString());
 		dealerHand.addCard(deck.dealCard());
-		System.out.println(toString());
+		System.out.println(printDealerHand());
 		player.addCard(deck.dealCard());
 		System.out.println(player.toString());
 		dealerHand.addCard(deck.dealCard());
-		System.out.println(toString());
+		System.out.println(printDealerHand());
 		System.out.println();
 	}
 
-	public void printDeck() {
-		System.out.println(deck.toString());
+	public String printDeck() {
+		return deck.toString();
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		List<Card> dealerCards = dealerHand.handList();
-		for (int i = 0; i < dealerCards.size(); i++) {
-			if (i == 0) {
-				sb.append("****** ");
-			} else {
-				sb.append(dealerCards.get(i) + " ");
-			}
-			
-		}
-		return "Dealer: " + sb.toString();
+		return "\nDealer hand...\n" + "Dealer: " + dealerHand.toString() + "\nDealer hand value: "
+				+ dealerHand.getHandValue();
 	}
 
 	public int getHandValue() {
@@ -62,18 +53,38 @@ public class Dealer {
 	}
 
 	public void addCardToPlayer(Player player) {
+		if (deck.checkDeckSize() < 15) {
+			deck = new Deck();
+		}
 		player.addCard(deck.dealCard());
 	}
 
 	public void dealCardToDealer() {
+		if (deck.checkDeckSize() < 15) {
+			deck = new Deck();
+		}
 		dealerHand.addCard(deck.dealCard());
 		System.out.println("\nCard dealt to dealer...");
 		toString();
 	}
 
-	public void printDealerHand() {
-		System.out.println("\nDeler hand...");
-		System.out.println("Dealer: " + dealerHand.toString() + "\nDealer hand value: " + dealerHand.getHandValue());
+	public String printDealerHand() {
+		StringBuilder sb = new StringBuilder();
+		List<Card> dealerCards = dealerHand.handList();
+		for (int i = 0; i < dealerCards.size(); i++) {
+			if (i == 0) {
+				sb.append("**************");
+			} else if (i < dealerCards.size() - 1) {
+				sb.append(" | " + dealerCards.get(i));
+			} else {
+				sb.append(" | " + dealerCards.get(i));
+			}
+			if ((i + 1) % 3 == 0 && i < dealerCards.size() - 1) {
+				sb.append("\n");
+			}
+
+		}
+		return "Dealer: " + sb.toString();
 	}
 
 }

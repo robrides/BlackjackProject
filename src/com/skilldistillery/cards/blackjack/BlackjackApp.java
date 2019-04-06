@@ -26,47 +26,98 @@ public class BlackjackApp {
 		System.out.println("Welcome to the Blackjack Table\n");
 
 		do {
-			System.out.println("\n\nDealing...");
+			printMenu();
+			bust = false;
+			winner = false;
+			System.out.println("\n\nAces are a value of 11.");
+			System.out.println("\nDealing...");
 			dealer.dealFirstHand(player);
 			printBothHands();
-			winner = false;
-			getPlayerChoice();
-			while (!bust && dealer.getHandValue() < 17 && player.getHandValue() < 21) {
-				dealer.dealCardToDealer();
-				printBothHands();
+			checkFirstHandBlackjack();
+			if (!winner) {
+				getPlayerChoice();
+				while (!winner && !bust && dealer.getHandValue() < 17 && player.getHandValue() < 21) {
+					dealer.dealCardToDealer();
+					printBothHands();
+				}
 			}
 			checkForWinner();
-			System.out.println("Would you like to play again? 1) Yes 2) Quit >> ");
-			int playAgain = kb.nextInt();
-			if (playAgain == 1) {
-				keepPlaying = true;
-			} else {
-				keepPlaying = false;
-			}
+			playAgain();
 		} while (keepPlaying);
 	}
 
-	private void checkForWinner() {
+	private void playAgain() {
+		System.out.println("\nWould you like to play again? 1) Yes 2) Quit >> ");
+		int playAgain = kb.nextInt();
+		if (playAgain == 1) {
+			keepPlaying = true;
+		} else {
+			keepPlaying = false;
+		}
+	}
 
+	private void printMenu() {
+		int choice;
+		try {
+			do {
+				System.out.println("Please chose from the menu below: ");
+				System.out.println("1) Play Blackjack");
+				System.out.println("2) Print Deck");
+				System.out.println("3) Quit");
+				choice = kb.nextInt();
+				switch (choice) {
+				case 1:
+					break;
+				case 2:
+					System.out.println(dealer.printDeck());
+					break;
+				case 3:
+					System.exit(0);
+					break;
+				default:
+					break;
+				}
+			} while (choice != 1);
+		} catch (Exception e) {
+			System.out.println("\nPlease enter a number.\n");
+		}
+	}
+
+	private void checkFirstHandBlackjack() {
+		if (dealer.getHandValue() == 21) {
+			System.out.println("\nDealer wins!!!\n");
+			System.out.println(dealer.toString());
+			winner = true;
+		}
+	}
+
+	private void checkForWinner() {
 		if (dealer.getHandValue() > 21) {
 			System.out.println("\nPlayer wins!!!\n");
+			System.out.println(dealer.toString());
 			winner = true;
 		} else if (player.getHandValue() > 21) {
 			System.out.println("\nDealer wins!!!\n");
+			System.out.println(dealer.toString());
 			winner = true;
 		} else if (dealer.getHandValue() > 16 && dealer.getHandValue() > player.getHandValue()) {
 			System.out.println("\nDealer wins.\n");
+			System.out.println(dealer.toString());
 			winner = true;
 		} else if (dealer.getHandValue() > 16 && dealer.getHandValue() < player.getHandValue()) {
 			System.out.println("\nPlayer wins.\n");
+			System.out.println(dealer.toString());
 			winner = true;
 		} else if (dealer.getHandValue() == player.getHandValue()) {
 			System.out.println("\nThe hand is a push.\n");
+			System.out.println(dealer.toString());
 			winner = true;
 		} else if (dealer.getHandValue() == 21 && player.getHandValue() != 21) {
 			System.out.println("\nDealer wins.\n");
+			System.out.println(dealer.toString());
 		} else if (player.getHandValue() == 21 && dealer.getHandValue() != 21) {
 			System.out.println("\nPlayer wins.\n");
+			System.out.println(dealer.toString());
 		}
 	}
 
@@ -81,7 +132,7 @@ public class BlackjackApp {
 		int choice;
 
 		do {
-			System.out.println("Whould you like to 1) stand or 2) hit? ");
+			System.out.println("\nWhould you like to 1) stand or 2) hit? ");
 			choice = kb.nextInt();
 
 			switch (choice) {
@@ -102,8 +153,8 @@ public class BlackjackApp {
 
 	public void printBothHands() {
 		System.out.println("\nCurrent hands...");
-		System.out.println("Dealer: " + dealer.toString() + "\nDealer hand value: " + dealer.getHandValue());
-		System.out.println("Player: " + player.toString() + "\n Player hand value: " + player.getHandValue());
+		System.out.println("Dealer: " + dealer.printDealerHand() + "\nDealer hand value: ??");
+		System.out.println("Player: " + player.toString() + "\nPlayer hand value: " + player.getHandValue());
 	}
 
 }
