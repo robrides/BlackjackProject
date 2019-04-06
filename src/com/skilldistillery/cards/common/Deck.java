@@ -15,37 +15,53 @@ public class Deck {
 
 	private List<Card> createDeck() {
 		List<Card> deck = new ArrayList<>(52);
-		for(Suit suits : Suit.values()) {
+		for (Suit suits : Suit.values()) {
 			for (Rank ranks : Rank.values()) {
 				StringBuilder sb = new StringBuilder();
-				if (suits.getName().compareTo("HEART") == 0) {
-					sb.append((char)'\u2664');
+				if (suits == Suit.HEARTS) {// suits.getName().compareTo("HEART") == 0) {
+					sb.append((char) '\u2665');
 				}
-				if (suits.getName().compareTo("CLUB") == 0) {
-					sb.append((char)'\u2663');
+				if (suits == Suit.CLUBS) {
+					sb.append((char) '\u2667');
 				}
-				if (suits.getName().compareTo("DIAMOND") == 0) {
-					sb.append((char)'\u2666');
+				if (suits == Suit.DIAMONDS) {
+					sb.append((char) '\u2666');
 				}
-				if (suits.getName().compareTo("SPADE") == 0) {
-					sb.append((char)'\u2660');
+				if (suits == Suit.SPADES) {
+					sb.append((char) '\u2664');
 				}
 				deck.add(new Card(suits, ranks, sb.toString()));
 			}
 		}
 		return deck;
 	}
-	
-	public int checkDeckSize() {
+
+	public int getDeckSize() {
 		return cards.size();
 	}
 
 	public Card dealCard() {
 		return cards.remove(0);
 	}
-	
+
 	public void shuffle() {
 		Collections.shuffle(cards);
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < cards.size(); i++) {
+			if (i < cards.size() - 1) {
+				sb.append("" + (i + 1) + ": " + cards.get(i) + "\t");
+			} else {
+				sb.append("" + (i + 1) + ": " + cards.get(i) + "\n");
+			}
+			if ((i + 1) % 3 == 0) {
+				sb.append("\n");
+			}
+		}
+		return "\nFull Deck\n" + sb.toString();
 	}
 
 	@Override
@@ -72,6 +88,5 @@ public class Deck {
 			return false;
 		return true;
 	}
-	
-	
+
 }

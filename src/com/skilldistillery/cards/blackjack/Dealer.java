@@ -19,18 +19,22 @@ public class Dealer {
 		dealerHand = new BlackjackHand();
 	}
 
-	public void dealFirstHand(Player player) {
+	public void dealFirstHand(Player player) throws InterruptedException {
 		dealerHand.clearHand();
 		player.clearHand();
 		System.out.println();
 		player.addCard(deck.dealCard());
 		System.out.println(player.toString());
+		Thread.sleep(1000);
 		dealerHand.addCard(deck.dealCard());
 		System.out.println(printDealerHand());
+		Thread.sleep(1000);
 		player.addCard(deck.dealCard());
 		System.out.println(player.toString());
+		Thread.sleep(1000);
 		dealerHand.addCard(deck.dealCard());
 		System.out.println(printDealerHand());
+		Thread.sleep(1000);
 		System.out.println();
 	}
 
@@ -53,18 +57,19 @@ public class Dealer {
 	}
 
 	public void addCardToPlayer(Player player) {
-		if (deck.checkDeckSize() < 15) {
+		if (deck.getDeckSize() < 15) {
 			deck = new Deck();
 		}
 		player.addCard(deck.dealCard());
 	}
 
-	public void dealCardToDealer() {
-		if (deck.checkDeckSize() < 15) {
+	public void dealCardToDealer() throws InterruptedException {
+		if (deck.getDeckSize() < 15) {
 			deck = new Deck();
 		}
 		dealerHand.addCard(deck.dealCard());
 		System.out.println("\nCard dealt to dealer...");
+		Thread.sleep(1000);
 		toString();
 	}
 

@@ -10,19 +10,19 @@ public class BlackjackApp {
 	private boolean keepPlaying;
 	private boolean bust;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		new BlackjackApp().init();
 
 	}
 
-	private void init() {
+	private void init() throws InterruptedException {
 		dealer = new Dealer();
 		player = new Player();
 		kb = new Scanner(System.in);
 		run();
 	}
 
-	private void run() {
+	private void run() throws InterruptedException {
 		System.out.println("Welcome to the Blackjack Table\n");
 
 		do {
@@ -33,7 +33,7 @@ public class BlackjackApp {
 			System.out.println("\nDealing...");
 			dealer.dealFirstHand(player);
 			printBothHands();
-			checkFirstHandBlackjack();
+			checkInitialBlackjack();
 			if (!winner) {
 				getPlayerChoice();
 				while (!winner && !bust && dealer.getHandValue() < 17 && player.getHandValue() < 21) {
@@ -47,7 +47,7 @@ public class BlackjackApp {
 	}
 
 	private void playAgain() {
-		System.out.println("\nWould you like to play again? 1) Yes 2) Quit >> ");
+		System.out.println("\nWould you like to play again? 1) Yes | 2) Quit >> ");
 		int playAgain = kb.nextInt();
 		if (playAgain == 1) {
 			keepPlaying = true;
@@ -83,40 +83,48 @@ public class BlackjackApp {
 		}
 	}
 
-	private void checkFirstHandBlackjack() {
+	private void checkInitialBlackjack() throws InterruptedException {
 		if (dealer.getHandValue() == 21) {
-			System.out.println("\nDealer wins!!!\n");
-			System.out.println(dealer.toString());
+//			System.out.println("\nDealer wins!!!\n");
+//			Thread.sleep(1000);
+//			System.out.println(dealer.toString());
 			winner = true;
 		}
 	}
 
-	private void checkForWinner() {
+	private void checkForWinner() throws InterruptedException {
 		if (dealer.getHandValue() > 21) {
 			System.out.println("\nPlayer wins!!!\n");
+			Thread.sleep(1000);
 			System.out.println(dealer.toString());
 			winner = true;
 		} else if (player.getHandValue() > 21) {
 			System.out.println("\nDealer wins!!!\n");
+			Thread.sleep(1000);
 			System.out.println(dealer.toString());
 			winner = true;
 		} else if (dealer.getHandValue() > 16 && dealer.getHandValue() > player.getHandValue()) {
 			System.out.println("\nDealer wins.\n");
+			Thread.sleep(1000);
 			System.out.println(dealer.toString());
 			winner = true;
 		} else if (dealer.getHandValue() > 16 && dealer.getHandValue() < player.getHandValue()) {
 			System.out.println("\nPlayer wins.\n");
+			Thread.sleep(1000);
 			System.out.println(dealer.toString());
 			winner = true;
 		} else if (dealer.getHandValue() == player.getHandValue()) {
 			System.out.println("\nThe hand is a push.\n");
+			Thread.sleep(1000);
 			System.out.println(dealer.toString());
 			winner = true;
 		} else if (dealer.getHandValue() == 21 && player.getHandValue() != 21) {
 			System.out.println("\nDealer wins.\n");
+			Thread.sleep(1000);
 			System.out.println(dealer.toString());
 		} else if (player.getHandValue() == 21 && dealer.getHandValue() != 21) {
 			System.out.println("\nPlayer wins.\n");
+			Thread.sleep(1000);
 			System.out.println(dealer.toString());
 		}
 	}
@@ -127,7 +135,7 @@ public class BlackjackApp {
 		}
 	}
 
-	private void getPlayerChoice() {
+	private void getPlayerChoice() throws InterruptedException {
 		boolean keepGoing = true;
 		int choice;
 
@@ -151,10 +159,12 @@ public class BlackjackApp {
 		} while (keepGoing && !bust);
 	}
 
-	public void printBothHands() {
+	public void printBothHands() throws InterruptedException {
 		System.out.println("\nCurrent hands...");
-		System.out.println("Dealer: " + dealer.printDealerHand() + "\nDealer hand value: ??");
-		System.out.println("Player: " + player.toString() + "\nPlayer hand value: " + player.getHandValue());
+		System.out.println(dealer.printDealerHand() + "\nDealer hand value: ??");
+		Thread.sleep(1000);
+		System.out.println(player.toString() + "\nPlayer hand value: " + player.getHandValue());
+		Thread.sleep(1000);
 	}
 
 }
