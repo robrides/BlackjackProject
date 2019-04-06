@@ -2,13 +2,13 @@ package com.skilldistillery.cards.blackjack;
 
 import java.util.Scanner;
 
-import com.skilldistillery.cards.common.Deck;
-
 public class BlackjackApp {
 	private Scanner kb;
-	private BlackjackHand playerHand;
-	private BlackjackHand dealerHand;
-	private Deck deck;
+//	private BlackjackHand playerHand;
+//	private BlackjackHand dealerHand;
+	private Dealer dealer;
+//	private Deck deck;
+	private Player player;
 	boolean winner;
 	boolean stand;
 
@@ -18,20 +18,19 @@ public class BlackjackApp {
 	}
 
 	private void launch() {
-		deck = new Deck();
-		playerHand = new BlackjackHand();
-		dealerHand = new BlackjackHand();
+		dealer = new Dealer();
+		player = new Player();
 		kb = new Scanner(System.in);
 		System.out.println("Welcome to the Blackjack Table\n");
 
 		do {
 			System.out.println("Dealing...");
-			dealFirstHand();
+			dealer.dealFirstHand(player);
 			printHand();
 			winner = false;
 			getPlayerChoice();
 			if (stand && !winner) {
-				dealCardToDealer();
+				dealer.dealCardToDealer();
 				printHand();
 				checkForWinner();
 			}
@@ -41,18 +40,18 @@ public class BlackjackApp {
 
 	private void checkForWinner() {
 
-		if (dealerHand.getHandValue() < 22 && playerHand.getHandValue() < 22) {
-			if (dealerHand.getHandValue() > playerHand.getHandValue()) {
+		if (dealer.getHandValue() < 22 && player.getHandValue() < 22) {
+			if (dealer.getHandValue() > player.getHandValue()) {
 				System.out.println("\nDealer wins.\n");
 				winner = true;
-			} else if (playerHand.getHandValue() > dealerHand.getHandValue()) {
+			} else if (player.getHandValue() > dealer.getHandValue()) {
 				System.out.println("\nDealer wins.\n");
 				winner = true;
 			} else {
 				winner = true;
 				System.out.println("\nThe hand is a push.\n");
 			}
-		} else if (dealerHand.getHandValue() > 21) {
+		} else if (dealer.getHandValue() > 21) {
 			System.out.println("\nPlayer wins!!!\n");
 			winner = true;
 		} else {
@@ -61,14 +60,6 @@ public class BlackjackApp {
 		}
 
 		winner = false;
-	}
-
-	private void dealCardToDealer() {
-		while (dealerHand.getHandValue() < 17) {
-			dealerHand.addCard(deck.dealCard());
-			System.out.println("\nCard dealt to dealer\n" + dealerHand.toString());
-		}
-		System.out.println("Dealer stands at 17\n");
 	}
 
 	private void getPlayerChoice() {
@@ -87,7 +78,7 @@ public class BlackjackApp {
 				stand = true;
 				break;
 			case 2:
-				playerHand.addCard(deck.dealCard());
+				dealer.addCardToPlayer(player);
 				printHand();
 				keepGoing = false;
 				break;
@@ -99,25 +90,10 @@ public class BlackjackApp {
 
 	}
 
-	private void dealFirstHand() {
-		dealerHand.clearHand();
-		playerHand.clearHand();
-		System.out.println();
-		playerHand.addCard(deck.dealCard());
-		System.out.println(playerHand.toString());
-		dealerHand.addCard(deck.dealCard());
-		System.out.println(dealerHand.toString());
-		playerHand.addCard(deck.dealCard());
-		System.out.println(playerHand.toString());
-		dealerHand.addCard(deck.dealCard());
-		System.out.println(dealerHand.toString());
-		System.out.println();
-	}
-
 	private void printHand() {
 		System.out.println("\nCurrent hands...");
-		System.out.println("Dealer: " + dealerHand.toString() + "\nDealer hand value: " + dealerHand.getHandValue());
-		System.out.println("Player: " + playerHand.toString() + "\n Player hand value: " + playerHand.getHandValue());
+		System.out.println("Dealer: " + dealer.toString() + "\nDealer hand value: " + dealer.getHandValue());
+		System.out.println("Player: " + player.toString() + "\n Player hand value: " + player.getHandValue());
 	}
 
 }
