@@ -1,6 +1,7 @@
 package com.skilldistillery.cards.blackjack;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.skilldistillery.cards.common.Card;
@@ -26,10 +27,16 @@ public class Shoe {
 				allCards.add(shoe.get(i).getCardFromDeck(j));
 			}
 		}
+		Collections.shuffle(allCards);
 	}
-
-	public Card dealCardFromShoe() {
-		
+	
+	public List<Card> getAllCards() {
+		List<Card> allCardsCopy = new ArrayList<>();
+		allCardsCopy.addAll(allCards);
+		return allCardsCopy;
+	}
+	
+	public Card dealCardFromShoe() {	
 		return allCards.remove(0);
 	}
 	
@@ -68,7 +75,21 @@ public class Shoe {
 				}
 			}
 		}
-		return "\nFull Shoe\n" + sb.toString();
+		return "\nDecks in the Shoe:\n" + sb.toString();
+	}
+	public String printAllCards() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < allCards.size(); i++) {
+				if (i < allCards.size() - 1) {
+					sb.append("" + (i + 1) + ": " + allCards.get(i) + "\t");
+				} else {
+					sb.append("" + (i + 1) + ": " + allCards.get(i) + "\n");
+				}
+				if ((i + 1) % 3 == 0) {
+					sb.append("\n");
+				}
+			}
+		return "\nAll Cards in the Shoe, no cheating!\n" + sb.toString();
 	}
 	
 

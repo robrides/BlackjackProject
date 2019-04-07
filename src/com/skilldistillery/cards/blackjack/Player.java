@@ -7,14 +7,15 @@ import com.skilldistillery.cards.common.Card;
 public class Player {
 
 	private BlackjackHand playerHand;
+	private int money;
 
-	public Player() {
+	public Player(int money) {
+		this.money = money;
 		buildPlayer();
 	}
 
 	private void buildPlayer() {
 		playerHand = new BlackjackHand();
-
 	}
 
 	public void addCard(Card card) {
@@ -23,6 +24,18 @@ public class Player {
 
 	public void clearHand() {
 		playerHand.clearHand();
+	}
+	
+	public int decreaseMoney(int amt) {
+		return money -= amt;
+	}
+	
+	public int increaseMoney(int amt) {
+		return money += amt;
+	}
+	
+	public int moneyStatus() {
+		return money;
 	}
 
 	@Override

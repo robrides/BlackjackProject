@@ -9,6 +9,8 @@ public class BlackjackApp {
 	private boolean winner;
 	private boolean keepPlaying;
 	private boolean bust;
+	private int money;
+	private int bet;
 
 	public static void main(String[] args) throws InterruptedException {
 		new BlackjackApp().init();
@@ -18,6 +20,7 @@ public class BlackjackApp {
 		int numDecks = 0;
 		kb = new Scanner(System.in);
 		printWelcome();
+		System.out.print("\n\nHow many decks of cards would you like in the Dealer's shoe? >> ");
 		try {
 			numDecks = kb.nextInt();
 		} catch (Exception e) {
@@ -25,21 +28,17 @@ public class BlackjackApp {
 			kb.hasNextLine();
 		}
 		dealer = new Dealer(numDecks);
-		player = new Player();
+		player = new Player(money);
 		run();
 	}
 
 	private void run() throws InterruptedException {
 		do {
 			printMenu();
+			printWelcome();
 			bust = false;
 			winner = false;
-			System.out.println("\n\nAces are a value of 11.");
-			System.out.println("\nDealing...");
-			dealer.dealFirstHand(player);
-			printBothHands();
-			checkForBust();
-			checkInitialBlackjack();
+			dealInitialHand();
 			if (!winner) {
 				getPlayerChoice();
 				while (!winner && !bust && dealer.getHandValue() < 17 && player.getHandValue() <= 21) {
@@ -51,6 +50,38 @@ public class BlackjackApp {
 			checkForWinner();
 			playAgain();
 		} while (keepPlaying);
+	}
+	
+	private void dealInitialHand() throws InterruptedException {
+		System.out.println("\n\nAces are a value of 11.");
+		getMoney();
+		bet();
+		System.out.println("\nDealing...");
+		dealer.dealFirstHand(player);
+		printBothHands();
+		checkForBust();
+		checkInitialBlackjack();		
+	}
+
+	private void getMoney() {
+		System.out.print("\nHow much money are you willing to lose today? >> ");
+		try {
+			money = kb.nextInt();
+		} catch (Exception e) {
+			System.out.println("Please enter a number.");
+			kb.nextLine();
+		}
+
+	}
+
+	private void bet() {
+		System.out.print("\nEnter bet amount: >> ");
+		try {
+			bet = kb.nextInt();
+		} catch (Exception e) {
+			System.out.println("\nPlease enter a number.\n");
+			kb.nextLine();
+		}
 	}
 
 	private void playAgain() {
@@ -69,35 +100,31 @@ public class BlackjackApp {
 	}
 
 	private void printWelcome() {
-		char a = '\u2664';
-		char b = '\u2665';
-		char c = '\u2666';
-		char d = '\u2667';
-		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
-				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
-				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
-		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
-				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
-				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
-		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
-				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
-				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		char a = '\u2664', b = '\u2665', c = '\u2666', d = '\u2667';
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d);
 		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d
 				+ "                                  " + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
 		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d
 				+ "  Welcome to the Blackjack Table  " + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
 		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d
 				+ "                                  " + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
-		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
-				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
-				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
-		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
-				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
-				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
-		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
-				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
-				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
-		System.out.print("\n\nHow many decks of cards would you like in the Dealer's shoe? >> ");
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d);
 	}
 
 	private void printMenu() {
@@ -105,9 +132,10 @@ public class BlackjackApp {
 		try {
 			do {
 				System.out.println("\nPlease chose from the menu below: ");
-				System.out.println("1) Play Blackjack");
-				System.out.println("2) Print Decks in Shoe");
-				System.out.println("3) Quit");
+				System.out.println("1) Play Blackjack.");
+				System.out.println("2) Print Decks going into the Shoe.");
+				System.out.println("3) Print all Cards from all decks in the Shoe.");
+				System.out.println("4) Quit.");
 				System.out.print("Enter choice: >> ");
 				choice = kb.nextInt();
 				switch (choice) {
@@ -117,6 +145,9 @@ public class BlackjackApp {
 					System.out.println(dealer.printShoeDeck());
 					break;
 				case 3:
+					System.out.println(dealer.printShoeCards());
+					break;
+				case 4:
 					System.exit(0);
 					break;
 				default:

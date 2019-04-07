@@ -47,8 +47,8 @@ public class Dealer {
 		return shoe.toString();
 	}
 
-	public String printShoe() {
-		return shoe.toString();
+	public String printShoeCards() {
+		return shoe.printAllCards();
 	}
 
 	@Override
@@ -70,36 +70,7 @@ public class Dealer {
 		return "Dealer: " + sb.toString() + "\nDealer hand value: " + dealerHand.getHandValue();
 
 	}
-
-	public int getHandValue() {
-		return dealerHand.getHandValue();
-	}
-
-	public void addCard(Card card) {
-		dealerHand.addCard(card);
-	}
-
-	public void addCardToPlayer(Player player) {
-		if (shoe.getAllCardsSize() < 15) {
-			shoe = new Shoe(numDecks);
-		}
-		player.addCard(shoe.dealCardFromShoe());
-	}
-
-	public void dealCardToDealer() throws InterruptedException {
-		if (shoe.getAllCardsSize() < 15) {
-			shoe = new Shoe(numDecks);
-		}
-		dealerHand.addCard(shoe.dealCardFromShoe());
-		System.out.println("\nCard dealt to dealer...");
-		Thread.sleep(500);
-		System.out.println(toString());
-	}
-
-	public List<Card> getHandOfCards() {
-		return dealerHand.getHandOfCards();
-	}
-
+	
 	public String printDealerHand() {
 		StringBuilder sb = new StringBuilder();
 		List<Card> dealerCards = dealerHand.getHandOfCards();
@@ -114,9 +85,40 @@ public class Dealer {
 			if ((i + 1) % 3 == 0 && i < dealerCards.size() - 1) {
 				sb.append("\n");
 			}
-
+			
 		}
 		return "Dealer: " + sb.toString() + "\nDealer hand value: ??";
+	}
+
+	public int getHandValue() {
+		return dealerHand.getHandValue();
+	}
+
+	public void addCard(Card card) {
+		dealerHand.addCard(card);
+	}
+
+	public void addCardToPlayer(Player player) {
+		if (shoe.getAllCardsSize() < 15) {
+			shoe = new Shoe(numDecks);
+			System.out.println("\nNew shoe initialized.\n");
+		}
+		player.addCard(shoe.dealCardFromShoe());
+	}
+
+	public void dealCardToDealer() throws InterruptedException {
+		if (shoe.getAllCardsSize() < 15) {
+			shoe = new Shoe(numDecks);
+			System.out.println("\nNew shoe initialized.\n");
+		}
+		dealerHand.addCard(shoe.dealCardFromShoe());
+		System.out.println("\nCard dealt to dealer...");
+		Thread.sleep(500);
+		System.out.println(toString());
+	}
+
+	public List<Card> getHandOfCards() {
+		return dealerHand.getHandOfCards();
 	}
 
 	public boolean checkBlackjackHand() {
