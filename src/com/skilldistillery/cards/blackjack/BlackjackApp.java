@@ -12,19 +12,24 @@ public class BlackjackApp {
 
 	public static void main(String[] args) throws InterruptedException {
 		new BlackjackApp().init();
-
 	}
 
 	private void init() throws InterruptedException {
-		dealer = new Dealer();
-		player = new Player();
+		int numDecks = 0;
 		kb = new Scanner(System.in);
+		printWelcome();
+		try {
+			numDecks = kb.nextInt();
+		} catch (Exception e) {
+			System.err.println("Please enter a number.");
+			kb.hasNextLine();
+		}
+		dealer = new Dealer(numDecks);
+		player = new Player();
 		run();
 	}
 
 	private void run() throws InterruptedException {
-		System.out.println("Welcome to the Blackjack Table\n");
-
 		do {
 			printMenu();
 			bust = false;
@@ -63,20 +68,53 @@ public class BlackjackApp {
 		}
 	}
 
+	private void printWelcome() {
+		char a = '\u2664';
+		char b = '\u2665';
+		char c = '\u2666';
+		char d = '\u2667';
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ "                                  " + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ "  Welcome to the Blackjack Table  " + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ "                                  " + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.println("" + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b
+				+ c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d
+				+ a + b + c + d + a + b + c + d + a + b + c + d + a + b + c + d);
+		System.out.print("\n\nHow many decks of cards would you like in the Dealer's shoe? >> ");
+	}
+
 	private void printMenu() {
 		int choice;
 		try {
 			do {
 				System.out.println("\nPlease chose from the menu below: ");
 				System.out.println("1) Play Blackjack");
-				System.out.println("2) Print Deck");
+				System.out.println("2) Print Decks in Shoe");
 				System.out.println("3) Quit");
+				System.out.print("Enter choice: >> ");
 				choice = kb.nextInt();
 				switch (choice) {
 				case 1:
 					break;
 				case 2:
-					System.out.println(dealer.printDeck());
+					System.out.println(dealer.printShoeDeck());
 					break;
 				case 3:
 					System.exit(0);

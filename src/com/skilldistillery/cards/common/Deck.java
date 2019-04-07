@@ -18,7 +18,7 @@ public class Deck {
 		for (Suit suits : Suit.values()) {
 			for (Rank ranks : Rank.values()) {
 				StringBuilder sb = new StringBuilder();
-				if (suits == Suit.HEARTS) {// suits.getName().compareTo("HEART") == 0) {
+				if (suits == Suit.HEARTS) {
 					sb.append((char) '\u2665');
 				}
 				if (suits == Suit.CLUBS) {
@@ -38,6 +38,10 @@ public class Deck {
 
 	public int getDeckSize() {
 		return cards.size();
+	}
+	
+	public Card getCardFromDeck(int c) {
+		return cards.get(c);
 	}
 
 	public Card dealCard() {

@@ -45,4 +45,20 @@ public class BlackjackHand implements Hand {
 		handPlayer.add(card);
 	}
 
+	public boolean checkBlackjackHand() {
+		boolean ace = false;
+		boolean value10 = false;
+		for (int i = 0; i < handPlayer.size(); i++) {
+			if (handPlayer.get(i).toString().contains("Ace")) {
+				ace = true;				
+			}
+			if (handPlayer.get(i).getValue() == 10) {
+				value10 = true;				
+			}
+		}
+		if (ace && value10) {
+		return true;
+		}
+		return false;
+	}
 }

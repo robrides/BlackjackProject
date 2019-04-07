@@ -3,43 +3,52 @@ package com.skilldistillery.cards.blackjack;
 import java.util.List;
 
 import com.skilldistillery.cards.common.Card;
-import com.skilldistillery.cards.common.Deck;
 
 public class Dealer {
 
-	private Deck deck;
+//	private Deck deck;
 	private BlackjackHand dealerHand;
+	private Shoe shoe;
+	private int numDecks;
 
-	public Dealer() {
-		buildDealer();
+	public Dealer(int numDecks) {
+		this.numDecks = numDecks;
+		buildDealer(numDecks);
 	}
 
-	private void buildDealer() {
-		deck = new Deck();
+	private void buildDealer(int numDecks) {
+		shoe = new Shoe(numDecks);
 		dealerHand = new BlackjackHand();
 	}
 
 	public void dealFirstHand(Player player) throws InterruptedException {
+		if (shoe.getAllCardsSize() < 15) {
+			shoe = new Shoe(numDecks);
+		}
 		dealerHand.clearHand();
 		player.clearHand();
 		System.out.println();
-		player.addCard(deck.dealCard());
+		player.addCard(shoe.dealCardFromShoe());
 		System.out.println(player.toString());
 		Thread.sleep(500);
-		dealerHand.addCard(deck.dealCard());
+		dealerHand.addCard(shoe.dealCardFromShoe());
 		System.out.println(printDealerHand());
 		Thread.sleep(500);
-		player.addCard(deck.dealCard());
+		player.addCard(shoe.dealCardFromShoe());
 		System.out.println(player.toString());
 		Thread.sleep(500);
-		dealerHand.addCard(deck.dealCard());
+		dealerHand.addCard(shoe.dealCardFromShoe());
 		System.out.println(printDealerHand());
 		Thread.sleep(500);
 		System.out.println();
 	}
 
-	public String printDeck() {
-		return deck.toString();
+	public String printShoeDeck() {
+		return shoe.toString();
+	}
+
+	public String printShoe() {
+		return shoe.toString();
 	}
 
 	@Override
@@ -59,7 +68,7 @@ public class Dealer {
 			}
 		}
 		return "Dealer: " + sb.toString() + "\nDealer hand value: " + dealerHand.getHandValue();
-		
+
 	}
 
 	public int getHandValue() {
@@ -71,28 +80,22 @@ public class Dealer {
 	}
 
 	public void addCardToPlayer(Player player) {
-		if (deck.getDeckSize() < 15) {
-			deck = new Deck();
+		if (shoe.getAllCardsSize() < 15) {
+			shoe = new Shoe(numDecks);
 		}
-		player.addCard(deck.dealCard());
-	}
-	public void getPlayerHand(Player player) {
-		if (deck.getDeckSize() < 15) {
-			deck = new Deck();
-		}
-		player.addCard(deck.dealCard());
+		player.addCard(shoe.dealCardFromShoe());
 	}
 
 	public void dealCardToDealer() throws InterruptedException {
-		if (deck.getDeckSize() < 15) {
-			deck = new Deck();
+		if (shoe.getAllCardsSize() < 15) {
+			shoe = new Shoe(numDecks);
 		}
-		dealerHand.addCard(deck.dealCard());
+		dealerHand.addCard(shoe.dealCardFromShoe());
 		System.out.println("\nCard dealt to dealer...");
 		Thread.sleep(500);
 		System.out.println(toString());
 	}
-	
+
 	public List<Card> getHandOfCards() {
 		return dealerHand.getHandOfCards();
 	}
@@ -115,22 +118,9 @@ public class Dealer {
 		}
 		return "Dealer: " + sb.toString() + "\nDealer hand value: ??";
 	}
-	
+
 	public boolean checkBlackjackHand() {
-		boolean ace = false;
-		boolean value10 = false;
-		for (int i = 0; i < dealerHand.getHandOfCards().size(); i++) {
-			if (dealerHand.getHandOfCards().get(i).toString().contains("Ace")) {
-				ace = true;				
-			}
-			if (dealerHand.getHandOfCards().get(i).getValue() == 10) {
-				value10 = true;				
-			}
-		}
-		if (ace && value10) {
-		return true;
-		}
-		return false;
+		return dealerHand.checkBlackjackHand();
 	}
 
 }
