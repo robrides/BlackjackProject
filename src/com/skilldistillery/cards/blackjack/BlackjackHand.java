@@ -30,7 +30,9 @@ public class BlackjackHand implements Hand {
 
 	@Override
 	public List<Card> getHandOfCards() {
-		return handPlayer;
+		List<Card> playerHand = new ArrayList<>();
+		playerHand = handPlayer;
+		return playerHand;
 	}
 
 	@Override
@@ -41,12 +43,6 @@ public class BlackjackHand implements Hand {
 	@Override
 	public void addCard(Card card) {
 		handPlayer.add(card);
-	}
-
-	public List<Card> handList() {
-		List<Card> playerHand = new ArrayList<>();
-		playerHand = handPlayer;
-		return playerHand;
 	}
 
 }

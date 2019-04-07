@@ -15,7 +15,7 @@ public class Card {
 
 	@Override
 	public String toString() {
-		return rank.getValue() + " of " + suit.getName() + " " + suitImg;
+		return rank + " of " + suit.getName() + " " + suitImg;
 	}
 
 	public int getValue() {

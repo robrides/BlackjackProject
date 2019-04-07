@@ -28,7 +28,7 @@ public class Player {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		List<Card> playerCards = playerHand.handList();
+		List<Card> playerCards = playerHand.getHandOfCards();
 		for (int i = 0; i < playerCards.size(); i++) {
 			if (i == 0) {
 				sb.append(playerCards.get(i));
@@ -41,11 +41,28 @@ public class Player {
 				sb.append("\n");
 			}
 		}
-		return "Player: " + sb.toString();
+		return "Player: " + sb.toString() + "\nPlayer hand value: " + playerHand.getHandValue();
 	}
 
 	public int getHandValue() {
 		return playerHand.getHandValue();
+	}
+
+	public boolean checkBlackjackHand() {
+		boolean ace = false;
+		boolean value10 = false;
+		for (int i = 0; i < playerHand.getHandOfCards().size(); i++) {
+			if (playerHand.getHandOfCards().get(i).toString().contains("Ace")) {
+				ace = true;				
+			}
+			if (playerHand.getHandOfCards().get(i).getValue() == 10) {
+				value10 = true;				
+			}
+		}
+		if (ace && value10) {
+		return true;
+		}
+		return false;
 	}
 
 }
