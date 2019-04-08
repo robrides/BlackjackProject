@@ -7,21 +7,21 @@
   * To run the project first compile the files then, run BlackjackApp. Follow the console based menus entering the number of choice to navigate through the application.
 
 ### Technologies Used
-* Java Programming Language
-* Java Collections Framework
-* Java IO
-* Unified Modeling Language
-* Eclipse IDE
-* Git
-* DRY
-* Object-Oriented Design
+ * Java Programming Language
+ * Java Collections Framework
+ * Java IO
+ * Unified Modeling Language
+ * Eclipse IDE
+ * Git
+ * DRY
+ * Object-Oriented Design
 
-  * Abstraction 
-  * Polymorphism
-  * Inheritance
-  * Encapsulation
-  * Interfaces
-  * Enumeration
+   * Abstraction 
+   * Polymorphism
+   * Inheritance
+   * Encapsulation
+   * Interfaces
+   * Enumeration
   
 
 ### Lessons Learned
