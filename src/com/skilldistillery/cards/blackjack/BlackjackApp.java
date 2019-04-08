@@ -281,7 +281,6 @@ public class BlackjackApp {
 	private void getPlayerChoice() throws InterruptedException {
 		boolean keepGoing = true;
 		int choice;
-
 		do {
 			System.out.print("\nWhould you like to 1) Stand or 2) Hit? >> ");
 			try {
