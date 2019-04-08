@@ -1,12 +1,10 @@
 package com.skilldistillery.cards.blackjack;
 
 import java.util.List;
-
 import com.skilldistillery.cards.common.Card;
 
 public class Dealer {
 
-//	private Deck deck;
 	private BlackjackHand dealerHand;
 	private Shoe shoe;
 	private int numDecks;

@@ -39,7 +39,7 @@ public class Deck {
 	public int getDeckSize() {
 		return cards.size();
 	}
-	
+
 	public Card getCardFromDeck(int c) {
 		return cards.get(c);
 	}
@@ -51,7 +51,7 @@ public class Deck {
 	public void shuffle() {
 		Collections.shuffle(cards);
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();

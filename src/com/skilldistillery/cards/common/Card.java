@@ -5,21 +5,21 @@ public class Card {
 	private Suit suit;
 	private Rank rank;
 	private String suitImg;
-	
-	Card(Suit suit, Rank rank, String suitImg) {
+
+	public Card(Suit suit, Rank rank, String suitImg) {
 		this.suit = suit;
 		this.rank = rank;
 		this.suitImg = suitImg;
-		
+
+	}
+
+	public int getValue() {
+		return rank.getValue();
 	}
 
 	@Override
 	public String toString() {
 		return rank + " of " + suit.getName() + " " + suitImg;
-	}
-
-	public int getValue() {
-		return rank.getValue();
 	}
 
 	@Override
@@ -46,5 +46,5 @@ public class Card {
 			return false;
 		return true;
 	}
-	
+
 }

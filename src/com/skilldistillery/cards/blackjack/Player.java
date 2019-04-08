@@ -62,20 +62,6 @@ public class Player {
 
 	public boolean checkBlackjackHand() {
 		return playerHand.checkBlackjackHand();
-//		boolean ace = false;
-//		boolean value10 = false;
-//		for (int i = 0; i < playerHand.getHandOfCards().size(); i++) {
-//			if (playerHand.getHandOfCards().get(i).toString().contains("Ace")) {
-//				ace = true;				
-//			}
-//			if (playerHand.getHandOfCards().get(i).getValue() == 10) {
-//				value10 = true;				
-//			}
-//		}
-//		if (ace && value10) {
-//		return true;
-//		}
-//		return false;
 	}
 
 }
