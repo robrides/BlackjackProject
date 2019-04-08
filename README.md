@@ -15,7 +15,6 @@
  * Git
  * DRY
  * Object-Oriented Design
-
    * Abstraction 
    * Polymorphism
    * Inheritance
