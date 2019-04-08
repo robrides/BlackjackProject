@@ -9,8 +9,7 @@ public class Player {
 	private BlackjackHand playerHand;
 	private int money;
 
-	public Player(int money) {
-		this.money = money;
+	public Player() {
 		buildPlayer();
 	}
 
