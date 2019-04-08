@@ -30,4 +30,4 @@
 
 ### UML
 
-* [![UML Diagram](https://github.com/robrides/BlackjackProject/blob/master/CardGamesBlackjack.png)]
+* ![UML Diagram](https://github.com/robrides/BlackjackProject/blob/master/CardGamesBlackjack.png)
