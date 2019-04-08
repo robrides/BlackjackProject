@@ -2,6 +2,7 @@ package com.skilldistillery.cards.blackjack;
 
 import java.util.List;
 import com.skilldistillery.cards.common.Card;
+import com.skilldistillery.cards.common.Shoe;
 
 public class Dealer {
 

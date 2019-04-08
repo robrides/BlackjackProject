@@ -1,11 +1,8 @@
-package com.skilldistillery.cards.blackjack;
+package com.skilldistillery.cards.common;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.skilldistillery.cards.common.Card;
-import com.skilldistillery.cards.common.Deck;
 
 public class Shoe {
 

@@ -26,7 +26,7 @@
 
 ### Lessons Learned
 
-* In developing this application, object oriented design was of great focus. Thinking through natural language parts of the game drove logical design decisions. Reusability was also a focus to ensure other card games could be developed based on commonalities such as card which has a suit and has a rank, as well as deck which has a card. Parts unique to the game of Blackjack use the common structures and customize for the specific game. Excellent project to reinforce OO principles.
+* In developing this application, object oriented design was of great focus. Thinking through natural language parts of the game drove logical design decisions. Reusability was also a focus to ensure other card games could be developed based on commonalities such as card which has a suit and has a rank, as well as deck which has a card, and Shoe which is used in other card games. Parts unique to the game of Blackjack use the common structures and customize for the specific game. Excellent project to reinforce OO principles.
 
 ### UML Diagram
 
