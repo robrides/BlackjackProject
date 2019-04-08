@@ -11,7 +11,6 @@ public class BlackjackApp {
 	private boolean keepPlaying;
 	private boolean push;
 	private boolean bust;
-	private int money;
 	private int bet;
 
 	public static void main(String[] args) throws InterruptedException {
@@ -70,7 +69,7 @@ public class BlackjackApp {
 	}
 
 	private void dealInitialHand() throws InterruptedException {
-		System.out.println("\n\nAces are a value of 11.");
+		System.out.println("\nAces are a value of 11.");
 		getInitialMoney();
 		bet();
 		System.out.println("\nDealing...");
@@ -128,14 +127,14 @@ public class BlackjackApp {
 		try {
 			bet = kb.nextInt();
 		} catch (Exception e) {
-			System.out.println("\nPlease enter a number.\n");
+			System.out.println("\nPlease enter a number.");
 			kb.nextLine();
 		}
 		if (player.moneyStatus() < bet) {
-			System.out.println("\nYou do not have enough money for that bet.\n");
+			System.out.println("\nYou do not have enough money for that bet.");
 			
 		} else {
-			System.out.println("\nBet accepted.\n");
+			System.out.println("\nBet accepted.");
 		}
 		} while (bet > player.moneyStatus());
 	}
@@ -150,7 +149,7 @@ public class BlackjackApp {
 				keepPlaying = false;
 			}
 		} catch (Exception e) {
-			System.err.println("\nPlease enter a Number.\n");
+			System.err.println("\nPlease enter a Number.");
 			kb.nextLine();
 		}
 	}
@@ -210,8 +209,9 @@ public class BlackjackApp {
 					break;
 				}
 			} while (choice != 1);
+			System.out.println("\n\n");
 		} catch (Exception e) {
-			System.err.println("\nPlease enter a number.\n");
+			System.err.println("\nPlease enter a number.");
 			kb.nextLine();
 		}
 	}
@@ -219,7 +219,7 @@ public class BlackjackApp {
 	private void checkInitialBlackjack() throws InterruptedException {
 		if (player.getHandValue() > 21 || dealer.getHandValue() > 21) {
 			bust = true;
-			System.out.println("\nBust on double Aces.  Not allowed in this version.\n");
+			System.out.println("\nBust on double Aces.  Not allowed in this version.");
 		} else if (player.getHandValue() == 21 && dealer.getHandValue() == 21) {
 			if (player.checkBlackjackHand() && dealer.checkBlackjackHand())
 				;
@@ -301,7 +301,7 @@ public class BlackjackApp {
 					break;
 				}
 			} catch (Exception e) {
-				System.err.println("\nPlease enter a number.\n");
+				System.err.println("\nPlease enter a number.");
 				kb.nextLine();
 			}
 		} while (keepGoing && !bust);
