@@ -5,7 +5,6 @@
 * Description
   * This is a Java based console implementation of the Blackjack card game. The objective in developing this application was to focus on object oriented design principles. 
   * To run the project first compile the files then, run BlackjackApp. Follow the console based menus entering the number of choice to navigate through the application.
-  * UML diagram
 
 ### Technologies Used
 * Java Programming Language
@@ -31,5 +30,5 @@
 
 ### UML
 
-![Image of UML Diagram]
+* UML Diagram
 (https://github.com/robrides/BlackjackProject/blob/master/CardGamesBlackjack.png)
