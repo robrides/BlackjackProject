@@ -3,6 +3,7 @@ package com.skilldistillery.cards.blackjack;
 import java.util.List;
 
 import com.skilldistillery.cards.common.Card;
+import com.skilldistillery.cards.connector.SaveMoneyToFile;
 
 public class Player {
 
@@ -62,6 +63,12 @@ public class Player {
 
 	public boolean checkBlackjackHand() {
 		return playerHand.checkBlackjackHand();
+	}
+	
+	public boolean saveMoney() {
+		SaveMoneyToFile mSaver = new SaveMoneyToFile();
+		mSaver.saveMoney();
+		return false;		
 	}
 
 }
