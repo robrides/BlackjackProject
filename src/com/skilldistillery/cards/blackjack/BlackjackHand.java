@@ -6,53 +6,62 @@ import java.util.List;
 import com.skilldistillery.cards.common.Card;
 import com.skilldistillery.cards.common.Hand;
 
-public class BlackjackHand implements Hand {
+public class BlackjackHand extends Hand {
 
-	private List<Card> handPlayer;
+	private List<Card> hand;
 
 	public BlackjackHand() {
-		handPlayer = new ArrayList<>();
+		hand = new ArrayList<>();
 	}
 
-	@Override
 	public int getHandValue() {
 		int value = 0;
-		for (Card card : handPlayer) {
+		for (Card card : hand) {
 			value += card.getValue();
 		}
 		return value;
 	}
 
-	@Override
 	public void clearHand() {
-		handPlayer.clear();
+		hand.clear();
 	}
 
+//	public List<Card> getHandOfCards() {
+//		List<Card> playerHand = new ArrayList<>();
+//		playerHand = hand;
+//		return playerHand;
+//	}
+
 	@Override
-	public List<Card> getHandOfCards() {
+	public List<Card> getHand() {
 		List<Card> playerHand = new ArrayList<>();
-		playerHand = handPlayer;
+		playerHand = super.getHand();
 		return playerHand;
 	}
 
 	@Override
-	public String toString() {
-		return "Hand: " + handPlayer;
+	public void setHand(List<Card> hand) {
+		// TODO Auto-generated method stub
+		super.setHand(hand);
 	}
 
 	@Override
+	public String toString() {
+		return "Hand: " + hand;
+	}
+
 	public void addCard(Card card) {
-		handPlayer.add(card);
+		hand.add(card);
 	}
 
 	public boolean checkBlackjackHand() {
 		boolean ace = false;
 		boolean value10 = false;
-		for (int i = 0; i < handPlayer.size(); i++) {
-			if (handPlayer.get(i).toString().contains("Ace")) {
+		for (int i = 0; i < hand.size(); i++) {
+			if (hand.get(i).toString().contains("Ace")) {
 				ace = true;				
 			}
-			if (handPlayer.get(i).getValue() == 10) {
+			if (hand.get(i).getValue() == 10) {
 				value10 = true;				
 			}
 		}

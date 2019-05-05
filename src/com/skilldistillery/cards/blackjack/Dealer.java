@@ -2,9 +2,10 @@ package com.skilldistillery.cards.blackjack;
 
 import java.util.List;
 import com.skilldistillery.cards.common.Card;
+import com.skilldistillery.cards.common.Player;
 import com.skilldistillery.cards.common.Shoe;
 
-public class Dealer {
+public class Dealer extends Player {
 
 	private BlackjackHand dealerHand;
 	private Shoe shoe;
@@ -20,7 +21,7 @@ public class Dealer {
 		dealerHand = new BlackjackHand();
 	}
 
-	public void dealFirstHand(Player player) throws InterruptedException {
+	public void dealFirstHand(BlackjackPlayer player) throws InterruptedException {
 		if (shoe.getAllCardsSize() < 15) {
 			shoe = new Shoe(numDecks);
 		}
@@ -53,7 +54,7 @@ public class Dealer {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		List<Card> dealerCards = dealerHand.getHandOfCards();
+		List<Card> dealerCards = dealerHand.getHand();
 		for (int i = 0; i < dealerCards.size(); i++) {
 			if (i == 0) {
 				sb.append(dealerCards.get(i));
@@ -72,7 +73,7 @@ public class Dealer {
 	
 	public String printDealerHand() {
 		StringBuilder sb = new StringBuilder();
-		List<Card> dealerCards = dealerHand.getHandOfCards();
+		List<Card> dealerCards = dealerHand.getHand();
 		for (int i = 0; i < dealerCards.size(); i++) {
 			if (i == 0) {
 				sb.append("**************");
@@ -97,7 +98,7 @@ public class Dealer {
 		dealerHand.addCard(card);
 	}
 
-	public void addCardToPlayer(Player player) {
+	public void addCardToPlayer(BlackjackPlayer player) {
 		if (shoe.getAllCardsSize() < 15) {
 			shoe = new Shoe(numDecks);
 			System.out.println("\nNew shoe initialized.\n");
@@ -116,8 +117,8 @@ public class Dealer {
 		System.out.println(toString());
 	}
 
-	public List<Card> getHandOfCards() {
-		return dealerHand.getHandOfCards();
+	public List<Card> getHand() {
+		return dealerHand.getHand();
 	}
 
 	public boolean checkBlackjackHand() {

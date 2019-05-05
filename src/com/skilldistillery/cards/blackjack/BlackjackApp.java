@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class BlackjackApp {
 	private Scanner kb;
 	private Dealer dealer;
-	private Player player;
+	private BlackjackPlayer player;
 	private boolean dealerWin;
 	private boolean playerWin;
 	private boolean keepPlaying;
@@ -29,7 +29,7 @@ public class BlackjackApp {
 			kb.hasNextLine();
 		}
 		dealer = new Dealer(numDecks);
-		player = new Player();
+		player = new BlackjackPlayer();
 		run();
 	}
 

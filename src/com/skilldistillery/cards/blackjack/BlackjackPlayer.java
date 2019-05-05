@@ -3,14 +3,15 @@ package com.skilldistillery.cards.blackjack;
 import java.util.List;
 
 import com.skilldistillery.cards.common.Card;
-import com.skilldistillery.cards.connector.SaveMoneyToFile;
+import com.skilldistillery.cards.common.Player;
+import com.skilldistillery.cards.connector.SaveMoneyAsFile;
 
-public class Player {
+public class BlackjackPlayer extends Player {
 
 	private BlackjackHand playerHand;
 	private int money;
 
-	public Player() {
+	public BlackjackPlayer() {
 		buildPlayer();
 	}
 
@@ -18,10 +19,12 @@ public class Player {
 		playerHand = new BlackjackHand();
 	}
 
+	@Override
 	public void addCard(Card card) {
 		playerHand.addCard(card);
 	}
 
+	@Override
 	public void clearHand() {
 		playerHand.clearHand();
 	}
@@ -41,7 +44,7 @@ public class Player {
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		List<Card> playerCards = playerHand.getHandOfCards();
+		List<Card> playerCards = playerHand.getHand();
 		for (int i = 0; i < playerCards.size(); i++) {
 			if (i == 0) {
 				sb.append(playerCards.get(i));
@@ -66,8 +69,8 @@ public class Player {
 	}
 	
 	public boolean saveMoney() {
-		SaveMoneyToFile mSaver = new SaveMoneyToFile();
-		mSaver.saveMoney();
+		SaveMoneyAsFile mSaver = new SaveMoneyAsFile();
+		mSaver.saveAs();
 		return false;		
 	}
 
